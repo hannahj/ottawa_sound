@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ottawa Traffic Noise</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>OTTAWA TRAFFIC NOISE</h1>
+
+        <div class="comparison">
+            <div class="column">
+                <div class="header">
+                    <p><strong>12:30PM</strong><br>Sun Jul 28, 2024<br>417 Closure</p>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="column">
+                <div class="header">
+                    <p><strong>12:30PM</strong><br>Sun Aug 4, 2024<br>Holiday Weekend</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAP 1-->
+        <div class="map-coordinates">
+            <p>45.40095389989861, -75.72267866205553</p>
+        </div>
+        <div id="map1"></div>
+        <div class="comparison">
+            <div class="column">
+                <div class="audio-visualization">
+                    <audio controls>
+                        <source src="sound/2024-07-28_01.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="decibel">
+                    <img src="img/db1.png" alt="Decibel Level">
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="column">
+                <div class="audio-visualization">
+                    <audio controls>
+                        <source src="sound/2024-07-28_02.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="decibel">
+                    <img src="img/db1.png" alt="Decibel Level">
+                </div>
+            </div>
+        </div>
+
+        <!-- MAP 2-->
+        <div class="map-coordinates">
+            <p>45.40207454649182, -75.71262127128979</p>
+        </div>
+        <div id="map2"></div>
+        <div class="comparison">
+            <div class="column">
+                <div class="audio-visualization">
+                    <audio controls>
+                        <source src="sound/2024-07-28_02.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="decibel">
+                    <img src="img/db1.png" alt="Decibel Level">
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="audio-visualization">
+                <audio controls>
+                    <source src="sound/2024-07-28_02.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="decibel">
+                    <img src="img/db1.png" alt="Decibel Level">
+                </div>
+            </div>
+        </div>
+
+        <!-- MAP 3-->
+        <div class="map-coordinates">
+            <p>45.39929660339961, -75.72347598958424,</p>
+        </div>
+        <div id="map3"></div>
+        <div class="comparison">
+            <div class="column">
+                <div class="audio-visualization">
+                    <audio controls>
+                        <source src="sound/2024-07-28_03.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="decibel">
+                    <img src="img/db1.png" alt="Decibel Level">
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="column">
+                <div class="audio-visualization">
+                    <audio controls>
+                        <source src="sound/2024-07-28_03.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="decibel">
+                    <img src="img/db1.png" alt="Decibel Level">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Function to initialize a map with dynamic coordinates
+            function initializeMap(mapId, lat, lng, zoom) {
+                const map = L.map(mapId).setView([lat, lng], zoom);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                L.marker([lat, lng]).addTo(map)
+                    .openPopup();
+            }
+
+            // Coordinates and zoom levels for the four maps
+            const maps = [
+                { id: 'map1', lat: 45.40095389989861, lng: -75.72267866205553, zoom: 15 },
+                { id: 'map2', lat: 45.40207454649182, lng: -75.71262127128979, zoom: 15 },
+                { id: 'map3', lat: 45.39929660339961, lng: -75.72347598958424, zoom: 15 },
+            ];
+
+            // Initialize each map with its respective coordinates and zoom level
+            maps.forEach(map => {
+                initializeMap(map.id, map.lat, map.lng, map.zoom);
+            });
+        });
+    </script>
+</body>
+</html>
